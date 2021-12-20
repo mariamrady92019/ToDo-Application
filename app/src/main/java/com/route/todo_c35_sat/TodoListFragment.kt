@@ -83,17 +83,15 @@ class TodoListFragment() : Fragment(){
     fun onItemClicked(){
 
         adapter.onItemClicked = object : TodosRecyclerAdapter.OnItemClicked{
-            override fun onItemClickedToUpdate(todo: Todo) {
-           showMessage(" what you need to do ?",
-               "update?",
-               DialogInterface.OnClickListener { dialog, which -> moveToUpdate(todo) },
-           "make it Done!",
-               DialogInterface.OnClickListener { dialog, which ->
-                   makeTodoDone(todo)
-               },
-               true
-           )
+            override fun onItemClicked(todo: Todo) {
 
+            showMessage(" what you need to do ?",
+                      "update?",
+                     DialogInterface.OnClickListener { dialog, which ->  moveToUpdate(todo)},
+                  "make it Done!",
+                     DialogInterface.OnClickListener { dialog, which -> makeTodoDone(todo) },
+                      true
+            )
 
             }
 
@@ -113,13 +111,16 @@ class TodoListFragment() : Fragment(){
 
        }
 
-    private fun makeTodoDone(todo: Todo) {
-        Toast.makeText(requireContext(), "done", Toast.LENGTH_LONG).show()
+
+
+
+  private fun makeTodoDone(todo: Todo) {
+
         var newTodo = todo
         newTodo.isDone=true
         MyDataBase.getInstance(requireContext()).todoDao().updateTodo(newTodo)
         refreshTodosList()
-
+      Toast.makeText(requireContext(), "done", Toast.LENGTH_LONG).show()
     }
 
     private fun refreshTodosList() {
@@ -135,7 +136,8 @@ class TodoListFragment() : Fragment(){
     }
 
     fun showMessage(
-        message: String, posActionName: String,
+        message: String,
+        posActionName: String,
         onPosClick: DialogInterface.OnClickListener?,
         negativeText: String,
         onNegativeClick: DialogInterface.OnClickListener?,
