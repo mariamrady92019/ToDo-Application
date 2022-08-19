@@ -12,6 +12,8 @@ and support multy languages
 * Shared preferences for small local ecache
 * RecyclerView & Fragment
 * DatePicker library
+* calender view 
+* bottom navigation
                        
 
 
